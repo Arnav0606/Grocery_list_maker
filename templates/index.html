@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Grocery List Maker</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+    <link rel="icon" type="image/x-icon" href="{{ url_for('static', filename='images.jpg') }}">
+
+</head>
+<body>
+
+    <h1>Grocery List Maker</h1>
+
+    <!-- Form to add a new task -->
+    <form action="/add" method="POST">
+        <input type="text" name="content" placeholder="Add new item" required>
+        <button type="submit">Add Item</button>
+    </form>
+
+    <!-- List of tasks -->
+    <ul>
+        {% for task in tasks %}
+            <li>
+                <span class="{{ 'done' if task.done else '' }}">{{ task.content }}</span>
+                <a href="/update/{{ task.id }}">[Toggle]</a>
+                <a href="/delete/{{ task.id }}">[Delete]</a>
+            </li>
+        {% endfor %}
+    </ul>
+
+</body>
+</html>
